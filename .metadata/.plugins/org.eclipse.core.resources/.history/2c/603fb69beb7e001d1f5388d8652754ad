@@ -1,0 +1,41 @@
+package com.shop.myapp.service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.shop.myapp.dto.MemberDTO;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public interface MemberService {
+	SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:sss");
+    Date time = new Date();
+    String localTime = format.format(time);
+    
+    private final MemberMapper memberMapper;
+    
+    @Transactional
+    public void joinUser(MemberDTO memberDTO) {
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        memberDTO.setUserPw(passwordEncoder.encode(memberDTO.getPassword()));
+        memberDTO.setUserAuth("USER");
+        memberDTO.setAppendDate(localTime);
+        memberDTO.setUpdateDate(localTime);
+        memberMapper.saveUser(memberDTO);
+    }
+    
+    public MemberDTO getUserAccount(String userId) {
+    	MemberDTO memberDTO = memberMapper.getUserAccount(userId);
+    	return memberDTO;
+    }
+    
+    public void updateUser(MemberDTO member) {
+    	memberMapper.updateUser(member);
+    }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thymeleaf 테스트2</title>
+</head>
+<body>
+    <h1>테스트 화면4</h1>
+    <table>
+		<thead>
+			<th>연번</th>
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>기타 사항</th>
+			<th>건수</th>
+		</thead>
+		<tbody>
+			<tr th:each="sample, status : ${sampleList}">
+				<td th:text="${status.count}"></td>
+				<td th:text="${sample.id}"></td>
+				<td th:text="${sample.pw}"></td>
+				<th:block th:if="${sample.id} == 'admin'">
+				<td>관리자</td>
+				</th:block>
+				<th:block th:unless="${sample.id} == 'admin'">
+				<td>일반회원</td>
+				</th:block>
+				<td th:text="${status.size}"></td>
+			</tr>
+			<!--
+				status.index : 0번 부터의 순번
+				status.count : 1번 부터의 연번
+				status.size : 데이터의 개수
+				status.current : 현재 요소
+				status.even : 현재 레코드가 짝수 번째의 여부
+				status.odd : 현재 레코드가 홀수 번째의 여부
+				status.first : 현재 레코드가 첫 번째인지 여부
+				status.last : 현재 레코드가 마지막 인지 여부
+			-->
+		</tbody>
+	</table>
+	<a href="https://www.naver.com">네이버</a><br><hr><br>
+    <a th:href="@{/sample/test5}">테스트5</a>
+</body>
+</html>

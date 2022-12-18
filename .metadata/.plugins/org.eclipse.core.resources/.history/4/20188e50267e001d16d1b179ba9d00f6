@@ -1,0 +1,6 @@
+package com.shop.myapp.service;
+
+public interface SampleService {
+	public List<SampleDTO> findAll();
+	public SampleDTO getSample(String id);
+}
