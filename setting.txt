@@ -1,0 +1,25 @@
+build.gradle
+boot version - 2.7.7.
+dependancy - 1.0.15.RELEASE
+
+application.properties
+
+#server
+server.port=8089
+
+#database
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://localhost:3308/myapp
+spring.datasource.username=root
+spring.datasource.password=1234
+
+#log level
+logging.level.org.springframework=info
+logging.level.com.company=debug
+
+#Mybatis(.xml을 가지고 table 데이터를 연결시킨다.)
+#JPA(Object Relationship Mapping = Java를 가지고 물리데이터를 객체들과 연결시킨다(tuple->entity))
+-> hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.format_sql=true	-> properties(특성)==format(table-field, java-column)
+spring.jpa.show-sql=true
